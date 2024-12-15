@@ -134,29 +134,7 @@ const Calendar: React.FC = () => {
     a.click();
   };
 
-  const handleExportCSV = () => {
-    const csv = filteredEvents
-      .map((event) => {
-        return `${event.title},${formatDate(event.start, {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        })},${formatDate(event.end, {
-          hour: "2-digit",
-          minute: "2-digit",
-        })},${event.extendedProps.description || ""}`;
-      })
-      .join("\n");
-    const csvBlob = new Blob([csv], { type: "text/csv" });
-    const url = URL.createObjectURL(csvBlob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "events.csv";
-    a.click();
-  };
-
+  
   return (
     <div> 
         <nav className="bg-[#9e3ffd] p-4">
@@ -258,12 +236,7 @@ const Calendar: React.FC = () => {
         >
           Export as JSON
         </button>
-        <button
-          className="bg-[#cc00c8] text-white p-3 rounded-md mr-4"
-          onClick={handleExportCSV}
-        >
-          Export as CSV
-        </button>
+       
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
